@@ -19,6 +19,8 @@
     "riot": "^4.6.6"
   },
   "devDependencies": {
-    "@riotjs/compiler": "^4.5.5"
+    "@riotjs/compiler": "^4.5.5",
+    "rollup": "^1.31.0",
+    "rollup-plugin-riot": "^4.0.0"
   }
 }
