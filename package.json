@@ -14,5 +14,11 @@
     "calisthenics"
   ],
   "author": "Simon Dassow",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "riot": "^4.6.6"
+  },
+  "devDependencies": {
+    "@riotjs/compiler": "^4.5.5"
+  }
 }
