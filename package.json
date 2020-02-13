@@ -1,0 +1,18 @@
+{
+  "name": "bodyworkplans",
+  "version": "1.0.0",
+  "description": "Bodyweight workout plans",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sport",
+    "fitness",
+    "bodyweight",
+    "workout",
+    "calisthenics"
+  ],
+  "author": "Simon Dassow",
+  "license": "ISC"
+}
