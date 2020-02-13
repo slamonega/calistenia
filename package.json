@@ -4,7 +4,8 @@
   "description": "Bodyweight workout plans",
   "browser": "dist/bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
   },
   "keywords": [
     "sport",
@@ -20,8 +21,10 @@
   },
   "devDependencies": {
     "@riotjs/compiler": "^4.5.5",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "rollup": "^1.31.0",
-    "rollup-plugin-riot": "^4.0.0"
+    "rollup-plugin-riot": "^4.0.0",
+    "rollup-plugin-terser": "^5.2.0"
   },
   "files": [
     "dist/bundle.js"
