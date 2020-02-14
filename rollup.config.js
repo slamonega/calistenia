@@ -3,7 +3,7 @@ import json from '@rollup/plugin-json';
 import riot from 'rollup-plugin-riot';
 import { terser } from 'rollup-plugin-terser';
 
-export default {
+export default [ {
 	input: 'src/main.js',
 	output: [
 		{
@@ -18,4 +18,18 @@ export default {
 		riot(),
 		terser()
 	]
-}
+}, {
+	input: 'src/service-worker.js',
+	output: [
+		{
+			file: 'dist/sw.js',
+			format: 'cjs',
+			sourcemap: true
+		}
+	],
+	plugins: [
+		resolve(),
+		json(),
+		terser()
+	]
+} ]
