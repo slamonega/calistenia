@@ -17,6 +17,7 @@
   "author": "Simon Dassow",
   "license": "ISC",
   "dependencies": {
+    "date-fns": "^2.9.0",
     "riot": "^4.6.6"
   },
   "devDependencies": {
