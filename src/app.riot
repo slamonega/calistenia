@@ -1,11 +1,57 @@
 <app>
-  <p>{ props.message }</p>
-  <button onclick={ x }>x</button>
+  <select onchange={ select }>
+    <option></option>
+    <optgroup each={ plan in Object.entries( state.plans ) } label={ plan[0] }>
+      <option each={ entry in Object.entries( plan[1] ) } value={ plan[0] + ':' + entry[0] } selected={ state.plan == plan[0] && state.name == entry[0] }>{ entry[0] }</option>
+    </optgroup>
+  </select>
+  <ul>
+    <li each={ entry in Object.entries( state.days ) } class={ entry[0] == state.today ? 'today' : '' }>
+      { entry[0] }<span if={ entry[1].length == 0 }>: Off</span>
+      <ul>
+        <li each={ exercise in entry[1] }>
+          { exercise.name } ({ exercise.sets.length == 0 ? 'various' : exercise.sets.join( '-' ) + ' sets' })
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <style>
+    li.today {
+      background-color: #ccc;
+    }
+  </style>
   <script>
+    import plans from '../plans.json';
+    import { getISODay } from 'date-fns';
+
+    let weekdays = [ "", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
+
     export default {
-     x(ev) {
-        console.log( 'xxx' );
-      }
+     onBeforeMount(props, state) {
+       state.plans = plans;
+       state.plan = "";
+       state.name = "";
+       state.days = {};
+       state.today = weekdays[ getISODay( new Date() ) ];
+
+       let plan = window.localStorage.getItem( 'plan' );
+
+       if ( plan != '' ) {
+         let [ p, n ] = plan.split( ':' );
+
+         state.plan = p;
+         state.name = n;
+         state.days = plans[ p ][ n ]["Days"];
+       }
+     },
+     select( ev ) {
+       let val = ev.target.value;
+       let [ plan, name ] = val.split( ':' );
+
+       window.localStorage.setItem( 'plan', val );
+
+       this.update( { days: plans[ plan ][ name ]["Days"] } );
+     }
     }
   </script>
 </app>
