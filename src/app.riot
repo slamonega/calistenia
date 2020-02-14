@@ -1,9 +1,6 @@
 <app>
   <select onchange={ select }>
-    <option></option>
-    <optgroup each={ plan in Object.entries( state.plans ) } label={ plan[0] }>
-      <option each={ entry in Object.entries( plan[1] ) } value={ plan[0] + ':' + entry[0] } selected={ state.plan == plan[0] && state.name == entry[0] }>{ entry[0] }</option>
-    </optgroup>
+    <option each={ plan in Object.entries( state.plans ) } value={ plan[0] } selected={ state.plan == plan[0] }>{ plan[0] }</option>
   </select>
   <ul>
     <li each={ entry in Object.entries( state.days ) } class={ entry[0] == state.today ? 'today' : '' }>
@@ -25,32 +22,28 @@
     import { getISODay } from 'date-fns';
 
     let weekdays = [ "", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ];
+    let cc = "Convict Conditioning";
 
     export default {
      onBeforeMount(props, state) {
-       state.plans = plans;
+       state.plans = plans[ cc ];
        state.plan = "";
-       state.name = "";
        state.days = {};
        state.today = weekdays[ getISODay( new Date() ) ];
 
        let plan = window.localStorage.getItem( 'plan' );
 
-       if ( plan != '' ) {
-         let [ p, n ] = plan.split( ':' );
-
-         state.plan = p;
-         state.name = n;
-         state.days = plans[ p ][ n ]["Days"];
+       if ( plan != '' && plans[ cc ][ plan ] != undefined ) {
+         state.plan = plan;
+         state.days = plans[ cc ][ plan ]["Days"];
        }
      },
      select( ev ) {
-       let val = ev.target.value;
-       let [ plan, name ] = val.split( ':' );
+       let plan = ev.target.value;
 
-       window.localStorage.setItem( 'plan', val );
+       window.localStorage.setItem( 'plan', plan );
 
-       this.update( { days: plans[ plan ][ name ]["Days"] } );
+       this.update( { days: plans[ cc ][ plan ]["Days"] } );
      }
     }
   </script>
