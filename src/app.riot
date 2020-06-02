@@ -40,43 +40,48 @@
     import { getISODay } from 'date-fns';
 
     export default {
-     onBeforeMount( props, state ) {
-       state.days = {};
-       state.day = getISODay( new Date() ) - 1;
-       state.plan = '';
-       state.step = 1;
-       state.exercise = {};
 
-       let plan = window.localStorage.getItem( 'plan' );
+      onBeforeMount( props, state ) {
+        state.days = {};
+        state.day = getISODay( new Date() ) - 1;
+        state.plan = '';
+        state.step = 1;
+        state.exercise = {};
 
-       if ( plan && props.plans[ plan ] ) {
-         state.days = props.plans[ plan ].days;
-         state.plan = plan;
-       }
+        let plan = window.localStorage.getItem( 'plan' );
 
-       props.bus.on( 'view:home', route => {
-         this.update( { exercise: {} } );
-       } );
-       props.bus.on( 'view:exercise', route => {
-	 let exercise = props.exercises[ route.params.id ] || {};
-         let step = window.localStorage.getItem( 'step:' + exercise.id );
+        if ( plan && props.plans[ plan ] ) {
+          state.days = props.plans[ plan ].days;
+          state.plan = plan;
+        }
 
-         this.update( { exercise, step } );
-       } );
-     },
-     select( ev ) {
-       let plan = ev.target.value;
+        props.bus.on( 'view:home', route => {
+          this.update( { exercise: {} } );
+        } );
+        props.bus.on( 'view:exercise', route => {
+          let exercise = props.exercises[ route.params.id ] || {};
+          let step = window.localStorage.getItem( 'step:' + exercise.id );
 
-       window.localStorage.setItem( 'plan', plan );
+          this.update( { exercise, step } );
+        } );
+      },
 
-       this.update( { days: this.props.plans[ plan ].days } );
-     },
+      select( ev ) {
+        let plan = ev.target.value;
+
+        window.localStorage.setItem( 'plan', plan );
+
+        this.update( { days: this.props.plans[ plan ].days } );
+      },
+
       clear( ev ) {
         this.props.router.navigate( 'home' );
       },
+
       exercise( ev ) {
         this.props.router.navigate( 'exercise', { id: ev.target.value } );
       },
+
       choose( ev ) {
         let route = this.props.router.getState();
         let exercise = route.params.id;
@@ -86,6 +91,7 @@
 
         this.update( { step } );
       }
+
     }
   </script>
 </app>
