@@ -1,7 +1,7 @@
 {
 	"Convict Conditioning": {
 		"New Blood": {
-			"Days": {
+			"days": {
 				"Monday": [
 					{ "name": "Pushups", "sets": [ 2, 3 ] },
 					{ "name": "Leg raises", "sets": [ 2, 3 ] }
@@ -18,7 +18,7 @@
 			}
 		},
 		"Good Behaviour": {
-			"Days": {
+			"days": {
 				"Monday": [
 					{ "name": "Pushups", "sets": [ 2 ] },
 					{ "name": "Leg raises", "sets": [ 2 ] }
@@ -38,7 +38,7 @@
 			}
 		},
 		"Veterano": {
-			"Days": {
+			"days": {
 				"Monday": [
 					{ "name": "Pullups", "sets": [ 2, 3 ] }
 				],
@@ -61,7 +61,7 @@
 			}
 		},
 		"Solitary Confinement": {
-			"Days": {
+			"days": {
 				"Monday": [
 					{ "name": "Pullups", "sets": [ 3, 5 ] },
 					{ "name": "Squats", "sets": [ 3, 5 ] },
@@ -96,7 +96,7 @@
 			}
 		},
 		"Supermax": {
-			"Days": {
+			"days": {
 				"Monday": [
 					{ "name": "Pullups", "sets": [ 10, 50 ] },
 					{ "name": "Squats", "sets": [ 10, 50 ] }

@@ -1,5 +1,11 @@
+import createRouter from 'router5';
+import browserPlugin from 'router5-plugin-browser';
 import * as riot from 'riot';
 import App from './app.riot';
+import plans from './plans.js';
+import weekdays from './weekdays.js';
+import exercises from './exercises.js';
+import observable from '@riotjs/observable';
 
 if ( 'serviceWorker' in navigator ) {
 	window.addEventListener( 'load', function() {
@@ -10,5 +16,27 @@ if ( 'serviceWorker' in navigator ) {
 	} );
 }
 
+const routes = [
+	{ name: 'home', path: '/' },
+	{ name: 'exercise', path: '/:id' },
+];
+const router = createRouter( routes );
+
+let bus = observable( {} );
+
+router.subscribe( msg => {
+	bus.trigger( 'view:' + msg.route.name, msg.route );
+} );
+
+router.usePlugin( browserPlugin( { useHash: true } ) );
+
 const mountApp = riot.component( App );
-const app = mountApp( document.getElementById( 'root' ), {} );
+const app = mountApp( document.getElementById( 'root' ), {
+	router: router,
+	plans: plans,
+	weekdays: weekdays,
+	exercises: exercises,
+	bus: bus,
+} );
+
+router.start();
