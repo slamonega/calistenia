@@ -48,7 +48,7 @@
         state.step = 1;
         state.exercise = {};
 
-        let plan = window.localStorage.getItem( 'plan' );
+        let plan = window.localStorage.getItem( 'plan' ) || 'New Blood';
 
         if ( plan && props.plans[ plan ] ) {
           state.days = props.plans[ plan ].days;
@@ -56,7 +56,7 @@
         }
 
         props.bus.on( 'view:home', route => {
-          this.update( { exercise: {} } );
+          this.update( { days: state.days } );
         } );
         props.bus.on( 'view:exercise', route => {
           let exercise = props.exercises[ route.params.id ] || {};
@@ -64,6 +64,7 @@
 
           this.update( { exercise, step } );
         } );
+
       },
 
       select( ev ) {
