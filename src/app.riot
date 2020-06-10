@@ -65,6 +65,10 @@
           this.update( { exercise, step } );
         } );
 
+        document.addEventListener( 'visibilitychange', () => {
+          this.update( { day: getISODay( new Date() ) - 1 } );
+        } );
+
       },
 
       select( ev ) {
