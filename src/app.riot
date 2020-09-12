@@ -1,52 +1,41 @@
 <app>
-  <select onchange={ select }>
-    <option each={ plan in Object.entries( props.plans ) } value={ plan[0] } selected={ state.plan == plan[0] }>{ plan[0] }</option>
-  </select>
-  <ul>
-    <li each={ ( exercises, day ) in state.days } class={ day == state.day ? 'today' : '' }>
-      { props.weekdays[ day ] }<span if={ exercises.length == 0 }>: Off</span>
+  <router>
+    <select onchange={ select }>
+      <option each={ plan in Object.entries( props.plans ) } value={ plan[0] } selected={ state.plan == plan[0] }>{ plan[0] }</option>
+    </select>
+
+    <route path="/#">
       <ul>
-        <li each={ exercise in exercises }>
-          <a href={ props.router.buildUrl( 'exercise', { id: exercise.id } ) }>{ exercise.name }</a>
-          <span>&nbsp;</span>
-          <span>({ exercise.sets.length == 0 ? 'various' : exercise.sets.join( '-' ) + ' sets' })</span>
+        <li each={ ( exercises, day ) in state.days } class={ day == state.day ? 'today' : '' }>
+          { props.weekdays[ day ] }<span if={ exercises.length == 0 }>: Off</span>
+          <ul>
+            <li each={ exercise in exercises }>
+              <a href="#/exercise/{ exercise.id }">{ exercise.name }</a>
+              <span>&nbsp;</span>
+              <span>({ exercise.sets.length == 0 ? 'various' : exercise.sets.join( '-' ) + ' sets' })</span>
+            </li>
+          </ul>
         </li>
       </ul>
-    </li>
-  </ul>
-  <div class="{ state.exercise.id ? '' : 'hidden' }" id="exercise">
-    <button onclick={ clear }>x</button>
-    <select onchange={ exercise }>
-      <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
-    </select>
-    <table>
-      <tr>
-        <th>#</th>
-        <th>Type</th>
-        <th>Easy</th>
-        <th>Normal</th>
-        <th>Hard</th>
-      </tr>
-      <tr each={ ( step, index ) in state.exercise.steps } class={ state.step == index + 1 ? 'chosen' : '' }>
-        <td><button onclick={ choose } value={ index + 1 }>{ index + 1 }</button></td>
-        <td>{ step.name }</td>
-        <td each={ goal in step.goals }>{ goal.join( '×' ) }</td>
-      </tr>
-    </table>
-  </div>
-  <style>
-  </style>
+    </route>
+
+    <route path="/#/exercise/:id">
+      <exercise id={ route.params[0] } exercises={ this.props.exercises }>
+      </exercise>
+    </route>
+  </router>
+
   <script>
     import { getISODay } from 'date-fns';
+    import { Router, Route } from '@riotjs/route';
+    import Exercise from './exercise.riot';
 
     export default {
-
+      components: { Router, Route, Exercise },
       onBeforeMount( props, state ) {
         state.days = {};
         state.day = getISODay( new Date() ) - 1;
         state.plan = '';
-        state.step = 1;
-        state.exercise = {};
 
         let plan = window.localStorage.getItem( 'plan' ) || 'New Blood';
 
@@ -55,48 +44,17 @@
           state.plan = plan;
         }
 
-        props.bus.on( 'view:home', route => {
-          this.update( { days: state.days } );
-        } );
-        props.bus.on( 'view:exercise', route => {
-          let exercise = props.exercises[ route.params.id ] || {};
-          let step = window.localStorage.getItem( 'step:' + exercise.id );
-
-          this.update( { exercise, step } );
-        } );
-
         document.addEventListener( 'visibilitychange', () => {
           this.update( { day: getISODay( new Date() ) - 1 } );
         } );
-
       },
-
       select( ev ) {
         let plan = ev.target.value;
 
         window.localStorage.setItem( 'plan', plan );
 
         this.update( { days: this.props.plans[ plan ].days } );
-      },
-
-      clear( ev ) {
-        this.props.router.navigate( 'home' );
-      },
-
-      exercise( ev ) {
-        this.props.router.navigate( 'exercise', { id: ev.target.value } );
-      },
-
-      choose( ev ) {
-        let route = this.props.router.getState();
-        let exercise = route.params.id;
-        let step = ev.target.value;
-
-        window.localStorage.setItem( 'step:' + exercise, step );
-
-        this.update( { step } );
       }
-
     }
   </script>
 </app>

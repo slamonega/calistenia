@@ -1,7 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import riot from 'rollup-plugin-riot';
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 export default [ {

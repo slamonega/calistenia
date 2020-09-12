@@ -1,0 +1,56 @@
+<exercise>
+  <div id="exercise">
+    <a href="#/">x</a>
+    <select onchange={ exercise }>
+      <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
+    </select>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Type</th>
+        <th>Easy</th>
+        <th>Normal</th>
+        <th>Hard</th>
+      </tr>
+      <tr each={ ( step, index ) in state.exercise.steps } class={ state.step == index + 1 ? 'chosen' : '' }>
+        <td><button onclick={ choose } value={ index + 1 }>{ index + 1 }</button></td>
+        <td>{ step.name }</td>
+        <td each={ goal in step.goals }>{ goal.join( '×' ) }</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    import { route, router } from '@riotjs/route'
+
+    export default {
+      state: {
+        exercise: {},
+        step: 1
+      },
+      render( id ) {
+        let step = window.localStorage.getItem( 'step:' + id ) || 1;
+
+        this.update( {
+          exercise: this.props.exercises[ id ] || {},
+          step: step
+        } );
+      },
+      onMounted() {
+        this.render( this.props.id );
+      },
+      exercise( ev ) {
+        router.push( '/#/exercise/' + ev.target.value )
+        this.render( ev.target.value );
+      },
+      choose( ev ) {
+        let exercise = this.state.exercise.id;
+        let step = ev.target.value;
+
+        window.localStorage.setItem( 'step:' + exercise, step );
+
+        this.update( { step } );
+      }
+    }
+  </script>
+</exercise>
