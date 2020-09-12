@@ -15,6 +15,10 @@
     "calisthenics"
   ],
   "author": "Simon Dassow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sdassow/bodyworkplans.git"
+  },
   "license": "ISC",
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
