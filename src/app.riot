@@ -1,7 +1,7 @@
 <app>
   <router onStarted={ started }>
     <nav>
-      <div class="back"></div>
+      <div class="back"><img src="favicon.svg"></div>
       <div class="select">
         <select onchange={ select }>
           <option each={ plan in Object.entries( props.plans ) } value={ plan[0] } selected={ state.plan == plan[0] }>{ plan[0] }</option>
