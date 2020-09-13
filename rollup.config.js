@@ -6,6 +6,7 @@ import manifest from 'rollup-plugin-manifest-json';
 import resolve from '@rollup/plugin-node-resolve';
 import riot from 'rollup-plugin-riot';
 import { terser } from 'rollup-plugin-terser';
+import pkg from './package.json';
 
 var resconf = { browser: true };
 var eslintconf = {
@@ -36,6 +37,10 @@ export default [ {
     manifest( {
       input: 'manifest.json',
       manifest: {
+        name: pkg.name,
+        short_name: pkg.name,
+        description: pkg.description,
+        categories: pkg.keywords,
         scope: '/',
         start_url: '/'
       },
