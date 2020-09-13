@@ -1,7 +1,7 @@
 {
   "name": "bodyworkplans",
   "version": "1.0.0",
-  "description": "Bodyweight workout plans",
+  "description": "Small app with full body workout programs",
   "browser": "dist/bundle.js",
   "root": "/bodyworkplans/",
   "scripts": {
