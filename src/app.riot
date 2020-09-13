@@ -1,5 +1,5 @@
 <app>
-  <router>
+  <router onStarted={ started }>
     <select onchange={ select }>
       <option each={ plan in Object.entries( props.plans ) } value={ plan[0] } selected={ state.plan == plan[0] }>{ plan[0] }</option>
     </select>
@@ -47,6 +47,11 @@
         document.addEventListener( 'visibilitychange', () => {
           this.update( { day: getISODay( new Date() ) - 1 } );
         } );
+      },
+      started() {
+        if ( ! window.location.href.includes('#') ) {
+          window.location.href = window.location.origin + '/#/';
+        }
       },
       select( ev ) {
         let plan = ev.target.value;
