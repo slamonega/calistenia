@@ -1,9 +1,14 @@
 <exercise>
   <div id="exercise">
-    <a href="#/">x</a>
-    <select onchange={ exercise }>
-      <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
-    </select>
+    <nav>
+      <div class="back"><a href="#/">◄</a></div>
+      <div class="select">
+        <select onchange={ exercise }>
+          <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
+        </select>
+      </div>
+    </nav>
+
     <table>
       <tr>
         <th>#</th>
