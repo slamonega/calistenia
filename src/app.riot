@@ -55,7 +55,7 @@
       },
       started() {
         if ( ! window.location.href.includes('#') ) {
-          window.location.href = window.location.origin + '/#/';
+          window.location.href += '#/';
         }
       },
       select( ev ) {
