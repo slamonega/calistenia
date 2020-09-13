@@ -8,6 +8,7 @@ import riot from 'rollup-plugin-riot';
 import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
+var root = pkg.root;
 var resconf = { browser: true };
 var eslintconf = {
   exclude: [ 'node_modules/**' ],
@@ -17,7 +18,7 @@ export default [ {
   input: 'src/main.js',
   output: [
     {
-      file: 'dist/bundle.js',
+      file: pkg.browser,
       format: 'cjs',
       sourcemap: true
     }
@@ -43,8 +44,8 @@ export default [ {
         short_name: pkg.name,
         description: pkg.description,
         categories: pkg.keywords,
-        scope: '/',
-        start_url: '/'
+        scope: root,
+        start_url: root
       },
       minify: true
     } )

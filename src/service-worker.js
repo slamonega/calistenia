@@ -1,11 +1,13 @@
-const version = 'v3';
+import { root } from '../package.json';
+
+const version = 'v5';
 const assets = [
-  '/',
-  '/bundle.js',
-  '/index.html',
-  '/manifest.json',
-  '/normalize.css',
-  '/style.css',
+  root,
+  root + 'bundle.js',
+  root + 'index.html',
+  root + 'manifest.json',
+  root + 'normalize.css',
+  root + 'style.css',
 ];
 
 self.addEventListener( 'install', ev => {

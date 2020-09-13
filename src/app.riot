@@ -9,13 +9,13 @@
       </div>
     </nav>
 
-    <route path="/#">
+    <route path="{ this.props.root }#">
       <ul>
         <li each={ ( exercises, day ) in state.days } class={ day == state.day ? 'today' : '' }>
           { props.weekdays[ day ] }<span if={ exercises.length == 0 }>: Off</span>
           <ul>
             <li each={ exercise in exercises }>
-              <a href="#/exercise/{ exercise.id }">{ exercise.name }</a>
+              <a href="{ this.props.root }#/exercise/{ exercise.id }">{ exercise.name }</a>
               <span>&nbsp;</span>
               <span>({ exercise.sets.length == 0 ? 'various' : exercise.sets.join( '-' ) + ' sets' })</span>
             </li>
@@ -24,8 +24,8 @@
       </ul>
     </route>
 
-    <route path="/#/exercise/:id">
-      <exercise id={ route.params[0] } exercises={ this.props.exercises }>
+    <route path="{ this.props.root }#/exercise/:id">
+      <exercise id={ route.params[0] } exercises={ this.props.exercises } root={ this.props.root }>
       </exercise>
     </route>
   </router>

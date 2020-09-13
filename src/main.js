@@ -3,6 +3,7 @@ import App from './app.riot';
 import plans from './plans.js';
 import weekdays from './weekdays.js';
 import exercises from './exercises.js';
+import { root } from '../package.json';
 
 if ( 'serviceWorker' in navigator ) {
   window.addEventListener( 'load', function() {
@@ -16,6 +17,7 @@ if ( 'serviceWorker' in navigator ) {
 const mountApp = riot.component( App );
 
 mountApp( document.getElementById( 'root' ), {
+  root: root,
   plans: plans,
   weekdays: weekdays,
   exercises: exercises,

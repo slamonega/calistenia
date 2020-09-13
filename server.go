@@ -7,9 +7,14 @@ import (
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("./dist"))
+	root := "/bodyworkplans/"
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Service-Worker-Allowed", "/")
+		r.URL.Path = root
+		http.Redirect(w, r, r.URL.String(), http.StatusFound)
+	})
+	fs := http.StripPrefix(root, http.FileServer(http.Dir("./dist")))
+	http.HandleFunc(root, func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Service-Worker-Allowed", root)
 		fs.ServeHTTP(w, r)
 	})
 	log.Println("Listening on", os.Args[1])

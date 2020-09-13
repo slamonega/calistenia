@@ -1,7 +1,7 @@
 <exercise>
   <div id="exercise">
     <nav>
-      <div class="back"><a href="#/">◄</a></div>
+      <div class="back"><a href="{ this.props.root }#/">◄</a></div>
       <div class="select">
         <select onchange={ exercise }>
           <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
@@ -56,7 +56,7 @@
         this.render( this.props.id );
       },
       exercise( ev ) {
-        router.push( '/#/exercise/' + ev.target.value )
+        router.push( this.props.root + '#/exercise/' + ev.target.value )
         this.render( ev.target.value );
       },
       choose( ev ) {
