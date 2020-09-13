@@ -32,6 +32,8 @@ export default [ {
     copy( {
       targets: [
         { src: 'index.html', dest: 'dist' },
+        { src: 'normalize.css', dest: 'dist' },
+        { src: 'style.css', dest: 'dist' },
       ]
     } ),
     manifest( {

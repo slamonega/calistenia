@@ -1,9 +1,11 @@
-const version = 'v2';
+const version = 'v3';
 const assets = [
   '/',
+  '/bundle.js',
   '/index.html',
   '/manifest.json',
-  '/bundle.js',
+  '/normalize.css',
+  '/style.css',
 ];
 
 self.addEventListener( 'install', ev => {
