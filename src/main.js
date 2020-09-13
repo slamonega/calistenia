@@ -6,7 +6,7 @@ import exercises from './exercises.js';
 
 if ( 'serviceWorker' in navigator ) {
   window.addEventListener( 'load', function() {
-    navigator.serviceWorker.register( './dist/sw.js', { scope: './' } ).then(
+    navigator.serviceWorker.register( './sw.js', { scope: './' } ).then(
       res => console.log( 'service worker registered', res.scope ),
       err => console.log( 'service worker not registered', err )
     );

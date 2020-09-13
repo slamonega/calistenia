@@ -1,9 +1,9 @@
-const version = 'v1';
+const version = 'v2';
 const assets = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/dist/bundle.js',
+  '/bundle.js',
 ];
 
 self.addEventListener( 'install', ev => {

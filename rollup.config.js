@@ -1,37 +1,60 @@
-import resolve from '@rollup/plugin-node-resolve';
-import json from '@rollup/plugin-json';
-import riot from 'rollup-plugin-riot';
 import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy';
+import { eslint } from 'rollup-plugin-eslint';
+import json from '@rollup/plugin-json';
+import manifest from 'rollup-plugin-manifest-json';
+import resolve from '@rollup/plugin-node-resolve';
+import riot from 'rollup-plugin-riot';
 import { terser } from 'rollup-plugin-terser';
 
+var resconf = { browser: true };
+var eslintconf = {
+  exclude: [ 'node_modules/**' ],
+};
+
 export default [ {
-	input: 'src/main.js',
-	output: [
-		{
-			file: 'dist/bundle.js',
-			format: 'cjs',
-			sourcemap: true
-		}
-	],
-	plugins: [
-		resolve(),
-		json(),
-		riot(),
-		commonjs(),
-		terser()
-	]
+  input: 'src/main.js',
+  output: [
+    {
+      file: 'dist/bundle.js',
+      format: 'cjs',
+      sourcemap: true
+    }
+  ],
+  plugins: [
+    riot(),
+    resolve( resconf ),
+    eslint( eslintconf ),
+    commonjs(),
+    json(),
+    terser(),
+    copy( {
+      targets: [
+        { src: 'index.html', dest: 'dist' },
+      ]
+    } ),
+    manifest( {
+      input: 'manifest.json',
+      manifest: {
+        scope: '/',
+        start_url: '/'
+      },
+      minify: true
+    } )
+  ]
 }, {
-	input: 'src/service-worker.js',
-	output: [
-		{
-			file: 'dist/sw.js',
-			format: 'cjs',
-			sourcemap: true
-		}
-	],
-	plugins: [
-		resolve(),
-		json(),
-		terser()
-	]
+  input: 'src/service-worker.js',
+  output: [
+    {
+      file: 'dist/sw.js',
+      format: 'esm',
+      sourcemap: true
+    }
+  ],
+  plugins: [
+    resolve( resconf ),
+    eslint( eslintconf ),
+    json(),
+    terser()
+  ]
 } ]
