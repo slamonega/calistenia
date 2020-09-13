@@ -14,7 +14,8 @@ if ( 'serviceWorker' in navigator ) {
 }
 
 const mountApp = riot.component( App );
-const app = mountApp( document.getElementById( 'root' ), {
+
+mountApp( document.getElementById( 'root' ), {
   plans: plans,
   weekdays: weekdays,
   exercises: exercises,
