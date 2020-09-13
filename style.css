@@ -72,3 +72,7 @@ div.back > a {
 nav > div.select {
   width: 100%;
 }
+.back img {
+	width: 100%;
+	margin-left: 0.125rem;
+}
