@@ -6,6 +6,16 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="manifest" href="manifest.json">
 		<style type="text/css">
+/* font setup from https://tailwindcss.com/docs/font-family */
+.font-sans {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.font-serif {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+.font-mono {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -55,7 +65,7 @@ select {
 		<title>bodyworkplans</title>
 	</head>
 	<body>
-		<div id="root"></div>
+		<div id="root" class="font-sans"></div>
 		<script src="bundle.js"></script>
 	</body>
 </html>
