@@ -1,9 +1,10 @@
 import { root } from '../package.json';
 
-const version = 'v6';
+const version = 'v7';
 const assets = [
   root,
   root + 'bundle.js',
+  root + 'bundle.js.map',
   root + 'index.html',
   root + 'manifest.json',
   root + 'normalize.css',
