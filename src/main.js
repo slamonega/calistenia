@@ -5,6 +5,8 @@ import weekdays from './weekdays.js';
 import exercises from './exercises.js';
 import { root } from '../package.json';
 
+import '../style.css';
+
 if ( 'serviceWorker' in navigator ) {
   window.addEventListener( 'load', function() {
     navigator.serviceWorker.register( './sw.js', { scope: './' } ).then(

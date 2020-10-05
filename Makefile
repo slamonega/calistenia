@@ -3,7 +3,6 @@ all: build run
 
 build:
 	npm run build
-	npm run build:css
 
 run:
 	go run server.go :8080
@@ -18,6 +17,5 @@ publish:
 	rm -rf public/*
 	ln -s public dist
 	npm run build
-	npm run build:css
 	@echo "Committing to gh-pages branch..."
 	cd public && git add -A && git commit -m "Release to gh-pages"

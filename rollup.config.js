@@ -3,6 +3,7 @@ import copy from 'rollup-plugin-copy';
 import { eslint } from 'rollup-plugin-eslint';
 import json from '@rollup/plugin-json';
 import manifest from 'rollup-plugin-manifest-json';
+import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import riot from 'rollup-plugin-riot';
 import { terser } from 'rollup-plugin-terser';
@@ -47,7 +48,16 @@ export default [ {
         start_url: root
       },
       minify: true
-    } )
+    } ),
+    postcss({
+      extract: true,
+      plugins: [
+        require('postcss-import')({}),
+        require('cssnano')({
+            preset: 'default',
+        }),
+      ]
+    }),
   ]
 }, {
   input: 'src/service-worker.js',
