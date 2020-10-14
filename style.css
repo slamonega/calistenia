@@ -21,8 +21,12 @@ button:focus, button:active,
 select:focus, select:active {
   outline: none;
 }
-li.today {
-  background-color: rgba(200, 200, 200, 0.2);
+li.today span.day {
+  font-weight: bold;
+}
+li.today span.scream {
+  font-weight: bold;
+  color: red;
 }
 #exercise {
   background-color: #fff;

@@ -12,7 +12,10 @@
     <route path="{ this.props.root }#">
       <ul>
         <li each={ ( exercises, day ) in state.days } class={ day == state.day ? 'today' : '' }>
-          { props.weekdays[ day ] }<span if={ exercises.length == 0 }>: Off</span>
+          <span class="day">{ props.weekdays[ day ] }</span>
+          <span if={ exercises.length == 0 } class={ day == state.day ? 'day' : '' }>: Off</span>
+          <span if={ day == state.day } class="day">, </span>
+          <span if={ day == state.day } class="scream"> TODAY!</span>
           <ul>
             <li each={ exercise in exercises }>
               <a href="{ this.props.root }#/exercise/{ exercise.id }">{ exercise.name }</a>
