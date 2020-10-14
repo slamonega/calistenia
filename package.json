@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@riotjs/compiler": "^4.11.0",
-    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "cssnano": "^4.1.10",
@@ -38,7 +38,7 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.1.1",
     "postcss-import": "^12.0.1",
-    "rollup": "^2.26.11",
+    "rollup": "^2.30.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-manifest-json": "^1.4.2",
