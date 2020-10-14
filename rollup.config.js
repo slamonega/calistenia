@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import { eslint } from 'rollup-plugin-eslint';
+import { generateSW } from 'rollup-plugin-workbox';
 import json from '@rollup/plugin-json';
 import manifest from 'rollup-plugin-manifest-json';
 import postcss from 'rollup-plugin-postcss';
@@ -15,7 +16,7 @@ var eslintconf = {
   exclude: [ 'node_modules/**' ],
 };
 
-export default [ {
+export default {
   input: 'src/main.js',
   output: [
     {
@@ -58,20 +59,11 @@ export default [ {
         }),
       ]
     }),
+    generateSW({
+      swDest: 'dist/sw.js',
+      globDirectory: 'dist',
+      globPatterns: [ 'bundle.*', '*.png', '*.ico', '*.svg', '*.xml', '*.html', '*.json' ],
+      modifyURLPrefix: { '': pkg.root },
+    }),
   ]
-}, {
-  input: 'src/service-worker.js',
-  output: [
-    {
-      file: 'dist/sw.js',
-      format: 'esm',
-      sourcemap: true
-    }
-  ],
-  plugins: [
-    resolve( resconf ),
-    eslint( eslintconf ),
-    json(),
-    terser()
-  ]
-} ]
+}
