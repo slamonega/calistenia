@@ -120,6 +120,7 @@ svg {
   fill: black;
   color: white;
   opacity: 0.9;
+  z-index: 10;
 }
 svg .octo-arm,
 svg .octo-body {
