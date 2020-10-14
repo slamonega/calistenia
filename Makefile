@@ -4,8 +4,11 @@ all: build run
 build:
 	npm run build
 
-run:
-	go run server.go :8080
+run: server
+	./server :8080
+
+server: server.go
+	go build -o server server.go
 
 publish:
 	@echo "Cleaning up..."
