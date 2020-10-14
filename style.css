@@ -114,4 +114,16 @@ nav > div.select {
     background: #333;
     color: #fff;
   }
+  #exercise button {
+    color: #fff;
+  }
+  #exercise table tr:first-of-type th {
+    border-bottom: 1px solid #ddd;
+  }
+  #exercise table td {
+    border-bottom: 1px dotted #000;
+  }
+  #exercise .chosen {
+    background-color: rgba(100, 100, 100, 0.2);
+  }
 }
