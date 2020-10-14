@@ -9,10 +9,31 @@ import '../style.css';
 
 if ( 'serviceWorker' in navigator ) {
   window.addEventListener( 'load', function() {
-    navigator.serviceWorker.register( './sw.js', { scope: './' } ).then(
-      res => console.log( 'service worker registered', res.scope ),
-      err => console.log( 'service worker not registered', err )
-    );
+    navigator.serviceWorker.register( './sw.js', { scope: './' } ).then( reg => {
+      reg.onupdatefound = function() {
+        var worker = reg.installing;
+
+        worker.onstatechange = function() {
+          switch (worker.state) {
+          case 'installed':
+            console.log( '[sw] registered', reg.scope );
+
+            if ( navigator.serviceWorker.controller ) {
+              console.log( '[sw] content installed or updated' );
+            }
+            else {
+              console.log( '[sw] content available offline' );
+            }
+
+            break;
+          case 'redundant':
+            console.log( '[sw] installing became redundant', reg.scope );
+
+            break;
+          }
+        };
+      };
+    } ).catch( err => console.log( '[sw] failed to register', err ) );
   } );
 }
 
