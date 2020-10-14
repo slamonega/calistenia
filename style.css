@@ -102,6 +102,30 @@ nav > div.select {
   max-width: 26rem;
 }
 
+/* octocat animation */
+.github-corner:hover .octo-arm { animation: octocat-wave 560ms ease-in-out }
+
+@keyframes octocat-wave {
+	0%,100% { transform:rotate(0) }
+	20%,60% { transform:rotate(-25deg) }
+	40%,80% { transform:rotate(10deg) }
+}
+
+@media (max-width:500px) {
+	.github-corner:hover .octo-arm { animation:none }
+	.github-corner .octo-arm { animation:octocat-wave 560ms ease-in-out }
+}
+
+svg {
+  fill: black;
+  color: white;
+  opacity: 0.9;
+}
+svg .octo-arm,
+svg .octo-body {
+  fill: white;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #333;
@@ -125,5 +149,13 @@ nav > div.select {
   }
   #exercise .chosen {
     background-color: rgba(100, 100, 100, 0.2);
+  }
+
+  svg {
+    fill: #999;
+  }
+  svg .octo-arm,
+  svg .octo-body {
+    fill: black;
   }
 }
