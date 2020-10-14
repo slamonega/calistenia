@@ -28,7 +28,7 @@
     </route>
 
     <route path="{ this.props.root }#/exercise/:id">
-      <exercise id={ route.params[0] } exercises={ this.props.exercises } root={ this.props.root }>
+      <exercise id={ route.params.id } exercises={ this.props.exercises } root={ this.props.root }>
       </exercise>
     </route>
   </router>
