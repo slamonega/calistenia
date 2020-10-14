@@ -1,7 +1,7 @@
 <exercise>
   <div id="exercise">
     <nav>
-      <div class="back"><a href="{ this.props.root }#/">◄</a></div>
+      <div class="back"><a href="{ this.props.root }#/"><img src="favicon.svg"></a></div>
       <div class="select">
         <select onchange={ exercise }>
           <option each={ exercise in Object.values( props.exercises ) } value={ exercise.id } selected={ state.exercise.id == exercise.id }>{ exercise.name }</option>
