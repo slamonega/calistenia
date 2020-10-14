@@ -106,3 +106,17 @@ nav > div.select {
 .root {
   max-width: 26rem;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #333;
+    color: #fff;
+  }
+  select {
+    color: #fff;
+  }
+  #exercise {
+    background: #333;
+    color: #fff;
+  }
+}
