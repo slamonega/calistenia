@@ -1,9 +1,9 @@
 {
-  "name": "bodyworkplans",
+  "name": "calistenia",
   "version": "1.0.0",
   "description": "Small app with full body workout programs",
   "browser": "dist/bundle.js",
-  "root": "/bodyworkplans/",
+  "root": "/calistenia/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "postcss -o dist/bundle.css style.css",
