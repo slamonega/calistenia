@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	root := "/bodyworkplans/"
+	root := "/calistenia/"
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		r.URL.Path = root
 		http.Redirect(w, r, r.URL.String(), http.StatusFound)
